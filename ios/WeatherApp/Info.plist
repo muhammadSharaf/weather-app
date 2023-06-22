@@ -53,11 +53,11 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>icomoon.ttf</string>
 		<string>Poppins-Bold.ttf</string>
 		<string>Poppins-Italic.ttf</string>
 		<string>Poppins-Medium.ttf</string>
 		<string>Poppins-Regular.ttf</string>
+		<string>icomoon.ttf</string>
 	</array>
 </dict>
 </plist>

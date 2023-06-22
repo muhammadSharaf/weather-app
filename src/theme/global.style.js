@@ -12,8 +12,8 @@ const globalStyles = StyleSheet.create({
 
   textH1: {
     fontFamily: FONTS.pinyonMedium,
-    fontSize: 64,
-    lineHeight: 84,
+    fontSize: 48,
+    lineHeight: 64,
     color: Theme.colors.primary,
   },
   textH2: {

@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   icon: {
     fontSize: 48,
     color: Theme.colors.secondary,
+    marginBottom: 8,
   },
   tmp: {
     ...globalStyles.textH1,
