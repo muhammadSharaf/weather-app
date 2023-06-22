@@ -8,7 +8,7 @@ const IconButton = ({icon, onPress = () => {}, size = 24, style = {}}) => {
     <TouchableOpacity
       style={[styles.container, style]}
       onPress={() => onPress()}>
-      <CustomIcon name={icon} size={size} style={styles.icon}/>
+      <CustomIcon name={icon} size={size} style={styles.icon} />
     </TouchableOpacity>
   );
 };

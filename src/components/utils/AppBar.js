@@ -6,8 +6,8 @@ import IconButton from '../elements/buttons/IconButton';
 const AppBar = () => {
   return (
     <View style={styles.container}>
-      <IconButton icon={'rainy'} />
-      <IconButton icon={'rainy'} />
+      <IconButton icon={'menu'} />
+      <IconButton icon={'settings'} />
     </View>
   );
 };
