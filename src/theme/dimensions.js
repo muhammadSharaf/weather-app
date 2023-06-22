@@ -1,0 +1,11 @@
+const DIMENSIONS = {
+  ICON: 24,
+  SQUARE_BTN: 42,
+
+  RADIUS_SM: 8,
+  RADIUS_L: 8,
+
+  SCREEN_PADDING: 16,
+};
+
+export default DIMENSIONS;
