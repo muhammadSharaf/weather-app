@@ -7,19 +7,23 @@ import {getCurrentWeather} from '../../store/slices/weatherSlice';
 
 const WeatherPrev = () => {
   const dispatch = useDispatch();
-  const currentWeather = useSelector(state => state.weatherReducer.weather);
+  const weather = useSelector(state => state.weatherReducer.weather);
+  const city = useSelector(state => state.citiesReducer.currentCity);
+
+  const {temp} = weather.main;
+  const {name, code} = city;
 
   useEffect(() => {
     dispatch(getCurrentWeather());
   }, [dispatch]);
 
-  console.log('currentWeather', currentWeather);
+  console.log('currentWeather', weather);
 
   return (
     <View style={styles.container}>
       <CustomIcon name={'rainy'} style={styles.icon} />
-      <Text style={styles.tmp}>26,9</Text>
-      <Text style={styles.cityName}>New yourk, USA</Text>
+      <Text style={styles.tmp}>{temp}</Text>
+      <Text style={styles.cityName}>{`${name}, ${code}`}</Text>
     </View>
   );
 };

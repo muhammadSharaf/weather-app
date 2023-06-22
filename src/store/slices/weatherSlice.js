@@ -32,10 +32,16 @@ const WeatherSlice = createSlice({
 export const getCurrentWeather = () => {
   return async (dispatch, getState) => {
     const {unit} = getState().weatherReducer;
+    const {currentCity} = getState().citiesReducer;
+
     dispatch(WeatherActions.setWeatherLoading(true));
 
     try {
-      const response = await getWeather(44.34, 10.99, unit);
+      const response = await getWeather(
+        currentCity.lat,
+        currentCity.long,
+        unit,
+      );
       dispatch(WeatherActions.updateCurrentWeather(response));
       dispatch(WeatherActions.setWeatherLoading(false));
     } catch (error) {
