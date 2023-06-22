@@ -13,20 +13,29 @@ const WeatherSlice = createSlice({
     setForecastLoading(state, action) {
       state.isLoadingForecast = action.payload;
     },
+    setTempUnit(state, action) {
+      state.unit = action.payload;
+    },
     updateCurrentWeather(state, action) {
-      state.weather = action.payload;
+      console.log('fetched current weather', action.payload);
+      state.weather = {
+        main: action.payload.main,
+        sun: action.payload.sys,
+        state: action.payload.weather[0],
+        wind: action.payload.wind,
+      };
     },
   },
 });
 
 // TODO cities slice
 export const getCurrentWeather = () => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const {unit} = getState().weatherReducer;
     dispatch(WeatherActions.setWeatherLoading(true));
 
     try {
-      const response = await getWeather(44.34, 10.99);
-      console.log('redux', response);
+      const response = await getWeather(44.34, 10.99, unit);
       dispatch(WeatherActions.updateCurrentWeather(response));
       dispatch(WeatherActions.setWeatherLoading(false));
     } catch (error) {

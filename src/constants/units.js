@@ -1,4 +1,4 @@
 export const WEATHER_UNIT = {
-  F: 'F',
-  C: 'C',
+  F: 'imperial',
+  C: 'metric',
 };

@@ -6,8 +6,10 @@ const ax = axios.create({
   params: {appid: API.KEY},
 });
 
-export const getWeather = async (lat, long) => {
-  const response = await ax.get(`/weather?lat=${lat}&lon=${long}`);
+export const getWeather = async (lat, long, unit) => {
+  const response = await ax.get(
+    `${API.WEATHER}?lat=${lat}&lon=${long}&units=${unit}`,
+  );
 
   console.log('weather', response);
 
@@ -20,8 +22,10 @@ export const getWeather = async (lat, long) => {
   // else throw new Error('Fetching data failed');
 };
 
-export const getWeatherForecast = async (lat, long) => {
-  const response = await ax.get(`/forecast?lat=${lat}&lon=${long}`);
+export const getWeatherForecast = async (lat, long, unit) => {
+  const response = await ax.get(
+    `${API.FORECAST}?lat=${lat}&lon=${long}&units=${unit}`,
+  );
 
   console.log('forecast', response);
 
@@ -35,13 +39,12 @@ export const getWeatherForecast = async (lat, long) => {
 };
 
 ax.interceptors.response.use(
-  (response) => {
+  response => {
     // Any status code that lie within the range of 2xx cause this function to trigger
     console.log('res', response);
     return response.data;
   },
-  (err) => {
+  err => {
     console.log('err', err);
-  }
+  },
 );
-
