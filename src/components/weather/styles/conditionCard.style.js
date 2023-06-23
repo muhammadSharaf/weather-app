@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import globalStyles from '../../../theme/global.style';
 
-const WIDTH = 36;
+const WIDTH = 40;
 
 const styles = StyleSheet.create({
   container: {

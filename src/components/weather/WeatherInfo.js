@@ -16,16 +16,12 @@ const WeatherInfo = () => {
     dispatch(getCurrentWeather());
   }, [dispatch]);
 
-  if (isLoading) {
-    return <Text>Loading</Text>;
-  }
-
   console.log('currentWeather', weather);
 
   return (
     <View>
-      <WeatherPrev weather={weather} city={city} />
-      <ConditionsContainer list={conditions} />
+      <WeatherPrev weather={weather} city={city} isLoading={isLoading} />
+      <ConditionsContainer list={conditions} isLoading={isLoading} />
     </View>
   );
 };
