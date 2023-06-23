@@ -14,11 +14,10 @@ const WeatherSlice = createSlice({
     setForecastLoading(state, action) {
       state.isLoadingForecast = action.payload;
     },
-    setTempUnit(state, action) {
+    setUnit(state, action) {
       state.unit = action.payload;
     },
     updateCurrentWeather(state, action) {
-      console.log('fetched current weather', action.payload);
       state.weather = {
         main: {
           ...action.payload.main,
@@ -45,14 +44,31 @@ const WeatherSlice = createSlice({
         },
         {
           type: WEATHER_CONDITIONS.FEEL_TEMP,
-          value: `${Math.round(action.payload.main.feels_like)} ${state.unit.temperature}`,
+          value: `${Math.round(action.payload.main.feels_like)}${
+            state.unit.tempSymbol
+          }`,
         },
       ];
+    },
+    updateDayTime(state, action) {
+      console.log('dayTime', action.payload);
+      const today = new Date().getDate();
+
+      state.dayTime = action.payload
+        .filter(time => new Date(time.dt_txt).getDate() === today)
+        .map(item => ({
+          time: new Date(item.dt_txt).getHours(),
+          temp: `${Math.round(item.main.temp)}${state.unit.tempSymbol}`,
+          weather: item.weather[0].main,
+        }));
+    },
+    updateForecast(state, action) {
+      console.log('fetched forecast', action.payload);
+      state.forecast = action.payload;
     },
   },
 });
 
-// TODO cities slice
 export const getCurrentWeather = () => {
   return async (dispatch, getState) => {
     const {unit} = getState().weatherReducer;
@@ -66,9 +82,33 @@ export const getCurrentWeather = () => {
         currentCity.long,
         unit.type,
       );
+
       dispatch(WeatherActions.updateCurrentWeather(response));
       dispatch(WeatherActions.updateCurrentWeatherConditions(response));
       dispatch(WeatherActions.setWeatherLoading(false));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getForecast = () => {
+  return async (dispatch, getState) => {
+    const {unit} = getState().weatherReducer;
+    const {currentCity} = getState().citiesReducer;
+
+    dispatch(WeatherActions.setForecastLoading(true));
+
+    try {
+      const response = await getWeatherForecast(
+        currentCity.lat,
+        currentCity.long,
+        unit.type,
+      );
+
+      dispatch(WeatherActions.updateDayTime(response.list.slice(0, 8)));
+      dispatch(WeatherActions.updateForecast(response));
+      dispatch(WeatherActions.setForecastLoading(false));
     } catch (error) {
       console.log(error);
     }

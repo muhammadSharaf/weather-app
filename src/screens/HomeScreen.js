@@ -4,7 +4,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import AppBar from '../components/utils/AppBar';
 import globalStyles from '../theme/global.style';
 import CurrentWeatherContainer from '../components/weather/containers/CurrentWeatherContainer';
-import HourlyConditionsContainer from '../components/weather/containers/HourlyConditionsContainer';
+import ForecastContainer from '../components/weather/containers/ForecastContainer';
 
 const HomeScreen = () => {
   return (
@@ -12,7 +12,7 @@ const HomeScreen = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <AppBar />
         <CurrentWeatherContainer />
-        <HourlyConditionsContainer />
+        <ForecastContainer />
       </ScrollView>
     </SafeAreaView>
   );

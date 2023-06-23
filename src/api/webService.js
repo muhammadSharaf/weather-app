@@ -11,15 +11,7 @@ export const getWeather = async (lat, long, unit) => {
     `${API.WEATHER}?lat=${lat}&lon=${long}&units=${unit}`,
   );
 
-  console.log('weather', response);
-
   return response;
-
-  // if (response.data.meta.msg === 'OK')
-  //   return response.data.data.map(el => {
-  //     return {name: el.name, image: el.gif.images.fixed_height_downsampled.url};
-  //   });
-  // else throw new Error('Fetching data failed');
 };
 
 export const getWeatherForecast = async (lat, long, unit) => {
@@ -27,15 +19,7 @@ export const getWeatherForecast = async (lat, long, unit) => {
     `${API.FORECAST}?lat=${lat}&lon=${long}&units=${unit}`,
   );
 
-  console.log('forecast', response);
-
   return response;
-
-  // if (response.data.meta.msg === 'OK')
-  //   return response.data.data.map(el => {
-  //     return {name: el.name, image: el.gif.images.fixed_height_downsampled.url};
-  //   });
-  // else throw new Error('Fetching data failed');
 };
 
 ax.interceptors.response.use(

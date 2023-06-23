@@ -5,13 +5,14 @@ import globalStyles from '../../../theme/global.style';
 
 const styles = StyleSheet.create({
   container: {
+    width: DIMENSIONS.HOURLY_CARD_W,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 4 * DIMENSIONS.ELEMENT_PADDING,
     marginHorizontal: DIMENSIONS.ELEMENT_PADDING / 2,
     ...Theme.shadows.heavy,
     borderRadius: DIMENSIONS.RADIUS_L,
-    backgroundColor: 'red',
+    overflow: 'hidden',
   },
   time: {
     ...globalStyles.textH4,

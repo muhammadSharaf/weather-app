@@ -6,6 +6,8 @@ const DIMENSIONS = {
   RADIUS_L: 16,
 
   ELEMENT_PADDING: 8,
+
+  HOURLY_CARD_W: 140,
 };
 
 export default DIMENSIONS;

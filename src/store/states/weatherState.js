@@ -12,6 +12,7 @@ const weatherState = {
     {type: WEATHER_CONDITIONS.HUMIDITY},
     {type: WEATHER_CONDITIONS.FEEL_TEMP},
   ],
+  dayTime: [],
   forecast: {},
 };
 
