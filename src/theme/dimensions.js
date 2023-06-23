@@ -3,9 +3,9 @@ const DIMENSIONS = {
   SQUARE_BTN: 42,
 
   RADIUS_SM: 8,
-  RADIUS_L: 8,
+  RADIUS_L: 16,
 
-  SCREEN_PADDING: 16,
+  ELEMENT_PADDING: 8,
 };
 
 export default DIMENSIONS;

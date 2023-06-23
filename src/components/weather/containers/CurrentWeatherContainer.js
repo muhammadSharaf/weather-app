@@ -1,11 +1,12 @@
 import React, {useEffect} from 'react';
 import {Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import WeatherPrev from './WeatherPrev';
+import WeatherPrev from '../WeatherPrev';
 import ConditionsContainer from './ConditionsContainer';
-import {getCurrentWeather} from '../../store/slices/weatherSlice';
+import {getCurrentWeather} from '../../../store/slices/weatherSlice';
+import globalStyles from '../../../theme/global.style';
 
-const WeatherInfo = () => {
+const CurrentWeatherContainer = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(state => state.weatherReducer.isLoadingWeather);
   const weather = useSelector(state => state.weatherReducer.weather);
@@ -19,11 +20,11 @@ const WeatherInfo = () => {
   console.log('currentWeather', weather);
 
   return (
-    <View>
+    <View style={globalStyles.container}>
       <WeatherPrev weather={weather} city={city} isLoading={isLoading} />
       <ConditionsContainer list={conditions} isLoading={isLoading} />
     </View>
   );
 };
 
-export default WeatherInfo;
+export default CurrentWeatherContainer;

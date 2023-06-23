@@ -7,9 +7,10 @@ const globalStyles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: Theme.colors.background,
-    padding: DIMENSIONS.SCREEN_PADDING,
   },
-
+  container: {
+    paddingHorizontal: DIMENSIONS.ELEMENT_PADDING,
+  },
   textH1: {
     fontFamily: FONTS.pinyonMedium,
     fontSize: 48,
@@ -37,6 +38,11 @@ const globalStyles = StyleSheet.create({
     color: Theme.colors.primary,
   },
   textH4: {
+    fontFamily: FONTS.pinyonRegular,
+    fontSize: 16,
+    color: Theme.colors.primary,
+  },
+  textH5: {
     fontFamily: FONTS.pinyonRegular,
     fontSize: 14,
     color: Theme.colors.primary,

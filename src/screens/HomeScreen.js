@@ -3,14 +3,16 @@ import {ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AppBar from '../components/utils/AppBar';
 import globalStyles from '../theme/global.style';
-import WeatherInfo from '../components/weather/WeatherInfo';
+import CurrentWeatherContainer from '../components/weather/containers/CurrentWeatherContainer';
+import HourlyConditionsContainer from '../components/weather/containers/HourlyConditionsContainer';
 
 const HomeScreen = () => {
   return (
     <SafeAreaView style={globalStyles.screen}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <AppBar />
-        <WeatherInfo />
+        <CurrentWeatherContainer />
+        <HourlyConditionsContainer />
       </ScrollView>
     </SafeAreaView>
   );

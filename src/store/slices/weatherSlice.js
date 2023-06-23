@@ -3,7 +3,6 @@ import weatherState from '../states/weatherState';
 
 import {getWeather, getWeatherForecast} from '../../api/webService';
 import {WEATHER_CONDITIONS} from '../../constants/weatherConstants';
-import { msToHM } from "../../helpers/conversionHelper";
 
 const WeatherSlice = createSlice({
   name: 'weather',
@@ -21,7 +20,10 @@ const WeatherSlice = createSlice({
     updateCurrentWeather(state, action) {
       console.log('fetched current weather', action.payload);
       state.weather = {
-        main: action.payload.main,
+        main: {
+          ...action.payload.main,
+          temp: Math.round(action.payload.main.temp),
+        },
         sun: action.payload.sys,
         state: action.payload.weather[0],
         wind: action.payload.wind,
@@ -43,7 +45,7 @@ const WeatherSlice = createSlice({
         },
         {
           type: WEATHER_CONDITIONS.FEEL_TEMP,
-          value: `${action.payload.main.feels_like} ${state.unit.temperature}`,
+          value: `${Math.round(action.payload.main.feels_like)} ${state.unit.temperature}`,
         },
       ];
     },

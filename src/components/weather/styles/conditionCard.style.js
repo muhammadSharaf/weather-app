@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     marginStart: 16,
   },
   title: {
-    ...globalStyles.textH4,
+    ...globalStyles.textH5,
   },
   value: {
     ...globalStyles.textH2B,

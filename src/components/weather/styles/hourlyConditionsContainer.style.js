@@ -4,13 +4,11 @@ import DIMENSIONS from '../../../theme/dimensions';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-
     marginTop: 2 * DIMENSIONS.ELEMENT_PADDING,
-    paddingHorizontal: 2 * DIMENSIONS.ELEMENT_PADDING,
+  },
+  listContainer: {
+    paddingBottom: 12,
+    paddingHorizontal: DIMENSIONS.ELEMENT_PADDING,
   },
 });
 

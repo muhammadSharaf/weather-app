@@ -15,6 +15,9 @@ const styles = StyleSheet.create({
   tmp: {
     ...globalStyles.textH1,
   },
+  unit: {
+    ...globalStyles.textH3,
+  },
   cityName: {
     ...globalStyles.textH3B,
   },
