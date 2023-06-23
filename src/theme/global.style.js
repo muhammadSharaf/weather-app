@@ -4,6 +4,15 @@ import DIMENSIONS from './dimensions';
 import { FONTS } from "./fonts";
 
 const globalStyles = StyleSheet.create({
+  flex: {
+    flex: 1,
+  },
+  flex2: {
+    flex: 2,
+  },
+  flex3: {
+    flex: 3,
+  },
   screen: {
     flex: 1,
     backgroundColor: Theme.colors.background,
@@ -39,6 +48,11 @@ const globalStyles = StyleSheet.create({
   },
   textH4: {
     fontFamily: FONTS.pinyonRegular,
+    fontSize: 16,
+    color: Theme.colors.primary,
+  },
+  textH4B: {
+    fontFamily: FONTS.pinyonMedium,
     fontSize: 16,
     color: Theme.colors.primary,
   },

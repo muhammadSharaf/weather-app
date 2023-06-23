@@ -22,9 +22,15 @@ const WeatherSlice = createSlice({
         main: {
           ...action.payload.main,
           temp: Math.round(action.payload.main.temp),
-          feels: `${Math.round(action.payload.main.feels_like)}${state.unit.tempSymbol}`,
-          min: `${Math.round(action.payload.main.temp_min)}${state.unit.tempSymbol}`,
-          max: `${Math.round(action.payload.main.temp_max)}${state.unit.tempSymbol}`,
+          feels: `${Math.round(action.payload.main.feels_like)}${
+            state.unit.tempSymbol
+          }`,
+          min: `${Math.round(action.payload.main.temp_min)}${
+            state.unit.tempSymbol
+          }`,
+          max: `${Math.round(action.payload.main.temp_max)}${
+            state.unit.tempSymbol
+          }`,
         },
         sun: action.payload.sys,
         state: action.payload.weather[0],
@@ -54,20 +60,17 @@ const WeatherSlice = createSlice({
       ];
     },
     updateDayTime(state, action) {
-      console.log('dayTime', action.payload);
-      const today = new Date().getDate();
-
-      state.dayTime = action.payload
-        .filter(time => new Date(time.dt_txt).getDate() === today)
-        .map(item => ({
-          time: new Date(item.dt_txt).getHours(),
-          temp: `${Math.round(item.main.temp)}${state.unit.tempSymbol}`,
-          state: item.weather[0].main,
-        }));
+      state.dayTime = action.payload.map(item => ({
+        time: new Date(item.dt_txt).getHours(),
+        temp: `${Math.round(item.main.temp)}${state.unit.tempSymbol}`,
+        state: item.weather[0].main,
+      }));
     },
     updateForecast(state, action) {
-      console.log('fetched forecast', action.payload);
-      state.forecast = action.payload;
+      state.forecast = action.payload.map(item => ({
+        temp: `${Math.round(item.main.temp)}${state.unit.tempSymbol}`,
+        state: item.weather[0].main,
+      }));
     },
   },
 });
@@ -109,8 +112,32 @@ export const getForecast = () => {
         unit.type,
       );
 
-      dispatch(WeatherActions.updateDayTime(response.list.slice(0, 8)));
-      dispatch(WeatherActions.updateForecast(response));
+      const today = new Date().getDate();
+
+      const todayData = [];
+      const nextDaysData = [];
+
+      let i = 0;
+      for (i = 0; i < response.list.length; i++) {
+        const date = response.list[i];
+        const day = new Date(date.dt_txt).getDate();
+        if (day === today) {
+          todayData.push(date);
+        } else if (day > today) {
+          break;
+        }
+      }
+
+      // get temp at 12:00 for next 5 days
+      for (i += 4; i < response.list.length; i++) {
+        nextDaysData.push(response.list[i]);
+        i += 7;
+      }
+
+      console.log('nextDaysData', nextDaysData);
+
+      dispatch(WeatherActions.updateDayTime(todayData));
+      dispatch(WeatherActions.updateForecast(nextDaysData));
       dispatch(WeatherActions.setForecastLoading(false));
     } catch (error) {
       console.log(error);

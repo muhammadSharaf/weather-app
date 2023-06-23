@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
-import DIMENSIONS from '../../../theme/dimensions';
-import globalStyles from '../../../theme/global.style';
-import Theme from '../../../theme/theme';
+import DIMENSIONS from '../../../../theme/dimensions';
+import globalStyles from '../../../../theme/global.style';
+import Theme from '../../../../theme/theme';
 
 const styles = StyleSheet.create({
   container: {

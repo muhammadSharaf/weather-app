@@ -22,7 +22,7 @@ const weatherState = {
     {time: 18},
     {time: 21},
   ],
-  forecast: {},
+  forecast: new Array(5),
 };
 
 export default weatherState;

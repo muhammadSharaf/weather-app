@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
 import {View} from 'react-native';
-import HourlyConditionsContainer from './HourlyConditionsContainer';
 import {useDispatch, useSelector} from 'react-redux';
+import HourlyConditionsContainer from './HourlyConditionsContainer';
 import {getForecast} from '../../../store/slices/weatherSlice';
+import ForecastedDaysContainer from './ForecastedDaysContainer';
 
 const ForecastContainer = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const ForecastContainer = () => {
   return (
     <View>
       <HourlyConditionsContainer isLoading={isLoading} />
+      <ForecastedDaysContainer isLoading={isLoading} />
     </View>
   );
 };

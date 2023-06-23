@@ -8,7 +8,7 @@ import {useStore} from 'react-redux';
 
 const WeatherPrev = ({weather, city, isLoading}) => {
   const {temp} = weather.main || 0.0;
-  const {main: condition, description} = weather.state || {};
+  const {main: condition} = weather.state || {};
   const {name, code} = city;
 
   const unit = useStore().getState().weatherReducer.unit;

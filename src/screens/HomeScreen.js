@@ -7,6 +7,7 @@ import globalStyles from '../theme/global.style';
 import CurrentWeatherContainer from '../components/weather/containers/CurrentWeatherContainer';
 import ForecastContainer from '../components/weather/containers/ForecastContainer';
 import {getCurrentWeather, getForecast} from '../store/slices/weatherSlice';
+import Theme from '../theme/theme';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,12 @@ const HomeScreen = () => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={[Theme.colors.primary]}
+            tintColor={Theme.colors.primary}
+          />
         }>
         <AppBar />
         <CurrentWeatherContainer />

@@ -13,6 +13,16 @@ export const MONTHS = [
   'Dec',
 ];
 
+export const DAYS = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+
 export const WEATHER_UNIT = {
   IMPERIAL: {
     type: 'imperial',

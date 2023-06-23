@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, FlatList} from 'react-native';
 import HourlyCard from '../HourlyCard';
-import styles from '../styles/hourlyConditionsContainer.style';
+import styles from './styles/hourlyConditionsContainer.style';
 import {WEATHER_ICONS} from '../../../constants/weatherConstants';
 import {useSelector} from 'react-redux';
 import {formatHh} from '../../../helpers/conversionHelper';
@@ -18,7 +18,7 @@ const HourlyConditionsContainer = ({isLoading}) => {
     if (isLoading) {
       const currentHour = new Date().getHours();
       const hoursAheadData = dayTimeData.filter(
-        time => time.time >= currentHour - 3,
+        time => time.time >= currentHour,
       );
       setDayTime(hoursAheadData);
     } else {

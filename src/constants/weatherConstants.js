@@ -1,6 +1,9 @@
 export const WEATHER_ICONS = {
-  Clear: 'sunny',
-  Clouds: 'sunny',
+  Clear: 'clear',
+  Clouds: 'cloudy',
+  Rain: 'rainy',
+  Snow: 'snowy',
+  Extreme: 'extreme',
 };
 
 export const WEATHER_CONDITIONS = {

@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import WeatherPrev from '../WeatherPrev';
 import ConditionsContainer from './ConditionsContainer';
 import {getCurrentWeather} from '../../../store/slices/weatherSlice';
-import styles from '../styles/currentWeatherContainer.style';
+import styles from './styles/currentWeatherContainer.style';
 import {MONTHS} from '../../../constants/units';
 
 const CurrentWeatherContainer = () => {
@@ -32,6 +32,9 @@ const CurrentWeatherContainer = () => {
           {!isLoading
             ? `${weather?.main?.max} / ${weather?.main?.min} Feels like ${weather?.main?.feels}`
             : '‎ '}
+        </Text>
+        <Text style={styles.minMaxTmp}>
+          {!isLoading ? weather?.state?.description : '‎ '}
         </Text>
       </View>
       <WeatherPrev weather={weather} city={city} isLoading={isLoading} />

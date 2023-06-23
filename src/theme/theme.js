@@ -7,6 +7,7 @@ const Theme = {
 
     white: '#fff',
     shade: '#4b5e80',
+    grey: '#525252',
     transparent: '#00000000',
   },
   shadows: {
