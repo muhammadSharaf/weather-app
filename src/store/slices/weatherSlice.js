@@ -58,7 +58,7 @@ const WeatherSlice = createSlice({
       const today = new Date().getDate();
 
       state.dayTime = action.payload
-        // .filter(time => new Date(time.dt_txt).getDate() === today)
+        .filter(time => new Date(time.dt_txt).getDate() === today)
         .map(item => ({
           time: new Date(item.dt_txt).getHours(),
           temp: `${Math.round(item.main.temp)}${state.unit.tempSymbol}`,

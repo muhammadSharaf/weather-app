@@ -2,10 +2,12 @@ import {StyleSheet} from 'react-native';
 import DIMENSIONS from '../../../theme/dimensions';
 import Theme from '../../../theme/theme';
 import globalStyles from '../../../theme/global.style';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
 const styles = StyleSheet.create({
   container: {
     width: DIMENSIONS.HOURLY_CARD_W,
+    height: 240,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 4 * DIMENSIONS.ELEMENT_PADDING,
@@ -27,6 +29,12 @@ const styles = StyleSheet.create({
   icon: {
     fontSize: 64,
     color: Theme.colors.white,
+  },
+  loader: {
+    position: 'absolute',
+  },
+  transparent: {
+    color: Theme.colors.transparent,
   },
 });
 

@@ -3,10 +3,14 @@ import {ActivityIndicator, View} from 'react-native';
 import styles from './styles/loader';
 import Theme from '../../../theme/theme';
 
-const Loader = ({size = 'large', centered = false}) => {
+const Loader = ({
+  size = 'large',
+  color = Theme.colors.secondary,
+  centered = false,
+}) => {
   return (
     <View style={centered ? styles.centered : styles.container}>
-      <ActivityIndicator size={size} color={Theme.colors.secondary} />
+      <ActivityIndicator size={size} color={color} />
     </View>
   );
 };

@@ -16,14 +16,18 @@ const WeatherPrev = ({weather, city, isLoading}) => {
   return (
     <View style={styles.container}>
       <CustomIcon name={getWeatherIcon(condition)} style={styles.icon} />
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <Text style={styles.tmp}>
-          {temp}
-          <Text style={styles.unit}> {unit.temperature}</Text>
-        </Text>
-      )}
+
+      <Text style={styles.tmp}>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            {temp}
+            <Text style={styles.unit}> {unit.temperature}</Text>
+          </>
+        )}
+      </Text>
+
       <Text style={styles.cityName}>{`${name}, ${code}`}</Text>
     </View>
   );

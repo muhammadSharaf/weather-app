@@ -16,7 +16,7 @@ const ForecastContainer = () => {
 
   return (
     <View>
-      <HourlyConditionsContainer />
+      <HourlyConditionsContainer isLoading={isLoading} />
     </View>
   );
 };

@@ -11,7 +11,12 @@ const ConditionCard = ({title, value, isLoading}) => {
       <View style={styles.dataContainer}>
         <Text style={styles.title}>{title}</Text>
         {isLoading ? (
-          <Loader size={'small'} />
+          <>
+            <View style={styles.loader}>
+              <Loader size={'small'} />
+            </View>
+            <Text style={styles.value}>{'‎ '}</Text>
+          </>
         ) : (
           <Text style={styles.value}>{value}</Text>
         )}

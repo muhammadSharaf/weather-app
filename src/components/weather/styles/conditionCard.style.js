@@ -20,6 +20,10 @@ const styles = StyleSheet.create({
   value: {
     ...globalStyles.textH2B,
   },
+  loader: {
+    position: 'absolute',
+    bottom: '20%',
+  },
 });
 
 export default styles;
