@@ -16,11 +16,17 @@ const styles = StyleSheet.create({
   },
   time: {
     ...globalStyles.textH4,
-    marginBottom: DIMENSIONS.ELEMENT_PADDING,
+    color: Theme.colors.white,
+    marginBottom: 2 * DIMENSIONS.ELEMENT_PADDING,
   },
   tmp: {
-    marginTop: 5 * DIMENSIONS.ELEMENT_PADDING,
-    ...globalStyles.textH2,
+    marginTop: 6 * DIMENSIONS.ELEMENT_PADDING,
+    ...globalStyles.textH2B,
+    color: Theme.colors.white,
+  },
+  icon: {
+    fontSize: 64,
+    color: Theme.colors.white,
   },
 });
 

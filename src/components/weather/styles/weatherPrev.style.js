@@ -1,11 +1,13 @@
 import {StyleSheet} from 'react-native';
 import Theme from '../../../theme/theme';
 import globalStyles from '../../../theme/global.style';
+import DIMENSIONS from '../../../theme/dimensions';
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: DIMENSIONS.ELEMENT_PADDING,
   },
   icon: {
     fontSize: 48,

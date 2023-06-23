@@ -4,7 +4,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import WeatherPrev from '../WeatherPrev';
 import ConditionsContainer from './ConditionsContainer';
 import {getCurrentWeather} from '../../../store/slices/weatherSlice';
-import globalStyles from '../../../theme/global.style';
+import styles from '../styles/currentWeatherContainer.style';
+import {MONTHS} from '../../../constants/units';
 
 const CurrentWeatherContainer = () => {
   const dispatch = useDispatch();
@@ -13,14 +14,26 @@ const CurrentWeatherContainer = () => {
   const city = useSelector(state => state.citiesReducer.currentCity);
   const conditions = useSelector(state => state.weatherReducer.conditions);
 
+  const today = new Date();
+
   useEffect(() => {
     dispatch(getCurrentWeather());
   }, [dispatch]);
 
-  console.log('currentWeather', weather);
+  console.log('weather', weather);
 
   return (
-    <View style={globalStyles.container}>
+    <View style={styles.container}>
+      <View style={styles.dayInfoContainer}>
+        <Text style={styles.today}>{`Today, ${today.getDate()} ${
+          MONTHS[today.getMonth()]
+        }`}</Text>
+        <Text style={styles.minMaxTmp}>
+          {!isLoading
+            ? `${weather?.main?.max} / ${weather?.main?.min} Feels like ${weather?.main?.feels}`
+            : '‎ '}
+        </Text>
+      </View>
       <WeatherPrev weather={weather} city={city} isLoading={isLoading} />
       <ConditionsContainer list={conditions} isLoading={isLoading} />
     </View>

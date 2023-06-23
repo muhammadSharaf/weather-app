@@ -22,6 +22,9 @@ const WeatherSlice = createSlice({
         main: {
           ...action.payload.main,
           temp: Math.round(action.payload.main.temp),
+          feels: `${Math.round(action.payload.main.feels_like)}${state.unit.tempSymbol}`,
+          min: `${Math.round(action.payload.main.temp_min)}${state.unit.tempSymbol}`,
+          max: `${Math.round(action.payload.main.temp_max)}${state.unit.tempSymbol}`,
         },
         sun: action.payload.sys,
         state: action.payload.weather[0],
@@ -55,11 +58,11 @@ const WeatherSlice = createSlice({
       const today = new Date().getDate();
 
       state.dayTime = action.payload
-        .filter(time => new Date(time.dt_txt).getDate() === today)
+        // .filter(time => new Date(time.dt_txt).getDate() === today)
         .map(item => ({
           time: new Date(item.dt_txt).getHours(),
           temp: `${Math.round(item.main.temp)}${state.unit.tempSymbol}`,
-          weather: item.weather[0].main,
+          state: item.weather[0].main,
         }));
     },
     updateForecast(state, action) {
