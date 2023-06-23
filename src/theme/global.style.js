@@ -18,22 +18,27 @@ const globalStyles = StyleSheet.create({
   },
   textH2: {
     fontFamily: FONTS.pinyonRegular,
-    fontSize: 18,
+    fontSize: 22,
     color: Theme.colors.primary,
   },
   textH2B: {
     fontFamily: FONTS.pinyonMedium,
-    fontSize: 18,
+    fontSize: 22,
     color: Theme.colors.primary,
   },
   textH3: {
     fontFamily: FONTS.pinyonRegular,
-    fontSize: 16,
+    fontSize: 18,
     color: Theme.colors.primary,
   },
   textH3B: {
     fontFamily: FONTS.pinyonMedium,
-    fontSize: 16,
+    fontSize: 18,
+    color: Theme.colors.primary,
+  },
+  textH4: {
+    fontFamily: FONTS.pinyonRegular,
+    fontSize: 14,
     color: Theme.colors.primary,
   },
 });
