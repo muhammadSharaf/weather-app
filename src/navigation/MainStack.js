@@ -15,6 +15,14 @@ export default function MainStack() {
         name={SCREENS.MAIN.HOME}
         component={ScreensContainer[SCREENS.MAIN.HOME]}
       />
+      <RootStack.Screen
+        name={SCREENS.MAIN.SETTINGS}
+        component={ScreensContainer[SCREENS.MAIN.SETTINGS]}
+      />
+      <RootStack.Screen
+        name={SCREENS.MAIN.CITIES}
+        component={ScreensContainer[SCREENS.MAIN.CITIES]}
+      />
     </RootStack.Navigator>
   );
 }

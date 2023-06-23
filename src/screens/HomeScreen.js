@@ -8,8 +8,10 @@ import CurrentWeatherContainer from '../components/weather/containers/CurrentWea
 import ForecastContainer from '../components/weather/containers/ForecastContainer';
 import {getCurrentWeather, getForecast} from '../store/slices/weatherSlice';
 import Theme from '../theme/theme';
+import IconButton from '../components/elements/buttons/IconButton';
+import {SCREENS} from '../navigation/SCREENS';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const dispatch = useDispatch();
   const [refreshing, setRefreshing] = useState(false);
 
@@ -35,7 +37,14 @@ const HomeScreen = () => {
             tintColor={Theme.colors.primary}
           />
         }>
-        <AppBar />
+        <AppBar>
+          <IconButton icon={'menu'} />
+          <IconButton
+            icon={'settings'}
+            onPress={() => navigation.navigate(SCREENS.MAIN.SETTINGS)}
+          />
+        </AppBar>
+
         <CurrentWeatherContainer />
         <ForecastContainer />
       </ScrollView>
