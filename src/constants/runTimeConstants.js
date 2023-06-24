@@ -1,5 +1,5 @@
 const CONSTANTS = {
-  MAX_RECENT_COUNT: 5,
+  MAX_RECENT_COUNT: 10,
 };
 
 export const MSG_CONSTANTS = {
