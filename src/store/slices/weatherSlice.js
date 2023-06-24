@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import weatherState from '../states/weatherState';
 
-import {getWeather, getWeatherForecast} from '../../api/webService';
+import {getWeatherWS, getWeatherForecastWS} from '../../api/webService';
 import {WEATHER_CONDITIONS} from '../../constants/weatherConstants';
 import {convertSpeed, convertTemperature} from '../../helpers/conversionHelper';
 import {MEASURE_UNIT} from '../../constants/units';
@@ -131,7 +131,7 @@ export const getCurrentWeather = () => {
     dispatch(WeatherActions.setWeatherLoading(true));
 
     try {
-      const response = await getWeather(
+      const response = await getWeatherWS(
         currentLocation.lat,
         currentLocation.long,
         unit.type,
@@ -156,7 +156,7 @@ export const getForecast = () => {
     dispatch(WeatherActions.setForecastLoading(true));
 
     try {
-      const response = await getWeatherForecast(
+      const response = await getWeatherForecastWS(
         currentLocation.lat,
         currentLocation.long,
         unit.type,

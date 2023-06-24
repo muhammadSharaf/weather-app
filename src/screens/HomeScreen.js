@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {RefreshControl, ScrollView} from 'react-native';
-import {useDispatch, useStore} from 'react-redux';
+import {useDispatch, useSelector, useStore} from 'react-redux';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AppBar from '../components/utils/AppBar';
 import globalStyles from '../theme/global.style';

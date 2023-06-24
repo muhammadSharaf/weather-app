@@ -5,15 +5,21 @@ import styles from './styles/roundButton.style';
 const RoundButton = ({
   title,
   isActive = true,
+  narrow = false,
   onPress = () => {},
   style = {},
 }) => {
   return (
     <TouchableOpacity
       disabled={!isActive}
-      style={[styles.container, style, !isActive && styles.inactive]}
+      style={[
+        styles.container,
+        style,
+        narrow && styles.narrow,
+        !isActive && styles.inactive,
+      ]}
       onPress={() => onPress()}>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={narrow ? styles.titleNarrow : styles.title}>{title}</Text>
     </TouchableOpacity>
   );
 };

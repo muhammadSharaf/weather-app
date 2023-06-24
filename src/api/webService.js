@@ -6,17 +6,25 @@ const ax = axios.create({
   params: {appid: API.KEY},
 });
 
-export const getWeather = async (lat, long, unit) => {
+export const getWeatherWS = async (lat, long, unit) => {
   const response = await ax.get(
-    `${API.WEATHER}?lat=${lat}&lon=${long}&units=${unit}`,
+    `${API.WEATHER_API}${API.WEATHER}?lat=${lat}&lon=${long}&units=${unit}`,
   );
 
   return response;
 };
 
-export const getWeatherForecast = async (lat, long, unit) => {
+export const getWeatherForecastWS = async (lat, long, unit) => {
   const response = await ax.get(
-    `${API.FORECAST}?lat=${lat}&lon=${long}&units=${unit}`,
+    `${API.WEATHER_API}${API.FORECAST}?lat=${lat}&lon=${long}&units=${unit}`,
+  );
+
+  return response;
+};
+
+export const getLocationWeatherWS = async (location, unit) => {
+  const response = await ax.get(
+    `${API.GEO_API}${API.GEO}?q=${location}&units=${unit}`,
   );
 
   return response;

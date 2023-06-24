@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {Text, View} from 'react-native';
-import { useDispatch, useSelector, useStore } from "react-redux";
+import {useDispatch, useSelector, useStore} from 'react-redux';
 import WeatherPrev from '../WeatherPrev';
 import ConditionsContainer from './ConditionsContainer';
 import {getCurrentWeather} from '../../../store/slices/weatherSlice';
@@ -12,14 +12,16 @@ const CurrentWeatherContainer = () => {
   const unit = useStore().getState().settingsReducer.unit;
   const isLoading = useSelector(state => state.weatherReducer.isLoadingWeather);
   const weather = useSelector(state => state.weatherReducer.weather);
-  const city = useSelector(state => state.locationsReducer.currentLocation);
+  const currentLocation = useSelector(
+    state => state.locationsReducer.currentLocation,
+  );
   const conditions = useSelector(state => state.weatherReducer.conditions);
 
   const today = new Date();
 
   useEffect(() => {
     dispatch(getCurrentWeather());
-  }, [dispatch]);
+  }, [dispatch, currentLocation]);
 
   return (
     <View style={styles.container}>
@@ -36,7 +38,11 @@ const CurrentWeatherContainer = () => {
           {!isLoading ? weather?.state?.description : '‎ '}
         </Text>
       </View>
-      <WeatherPrev weather={weather} city={city} isLoading={isLoading} />
+      <WeatherPrev
+        weather={weather}
+        location={currentLocation}
+        isLoading={isLoading}
+      />
       <ConditionsContainer list={conditions} isLoading={isLoading} />
     </View>
   );

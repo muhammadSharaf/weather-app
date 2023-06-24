@@ -6,10 +6,10 @@ import {getWeatherIcon} from '../../helpers/weatherHelper';
 import Loader from '../elements/custom/Loader';
 import {useStore} from 'react-redux';
 
-const WeatherPrev = ({weather, city, isLoading}) => {
+const WeatherPrev = ({weather, location, isLoading}) => {
   const {temp} = weather.main || 0.0;
   const {main: condition} = weather.state || {};
-  const {name, code} = city;
+  const {name, country} = location;
 
   const unit = useStore().getState().settingsReducer.unit;
 
@@ -28,7 +28,7 @@ const WeatherPrev = ({weather, city, isLoading}) => {
         )}
       </Text>
 
-      <Text style={styles.cityName}>{`${name}, ${code}`}</Text>
+      <Text style={styles.cityName}>{`${name}, ${country}`}</Text>
     </View>
   );
 };

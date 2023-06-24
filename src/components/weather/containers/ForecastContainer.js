@@ -10,10 +10,13 @@ const ForecastContainer = () => {
   const isLoading = useSelector(
     state => state.weatherReducer.isLoadingForecast,
   );
+  const currentLocation = useSelector(
+    state => state.locationsReducer.currentLocation,
+  );
 
   useEffect(() => {
     dispatch(getForecast());
-  }, [dispatch]);
+  }, [dispatch, currentLocation]);
 
   return (
     <View>

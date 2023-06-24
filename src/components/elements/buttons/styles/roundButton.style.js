@@ -12,11 +12,19 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     backgroundColor: Theme.colors.primary,
   },
+  narrow: {
+    paddingVertical: DIMENSIONS.ELEMENT_PADDING / 2,
+  },
   inactive: {
     backgroundColor: Theme.colors.grey,
   },
   title: {
     ...globalStyles.textH3,
+    color: Theme.colors.white,
+  },
+  titleNarrow: {
+    paddingTop: DIMENSIONS.ELEMENT_PADDING / 4,
+    ...globalStyles.textH5,
     color: Theme.colors.white,
   },
 });
