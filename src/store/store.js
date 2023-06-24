@@ -9,14 +9,14 @@ import SettingsSlice from './slices/settingsSlice';
 
 const reducers = combineReducers({
   weatherReducer: WeatherSlice.reducer,
-  citiesReducer: LocationsSlice.reducer,
+  locationsReducer: LocationsSlice.reducer,
   settingsReducer: SettingsSlice.reducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['settingsReducer', 'citiesReducer'],
+  whitelist: ['settingsReducer', 'locationsReducer'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

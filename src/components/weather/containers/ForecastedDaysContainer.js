@@ -9,6 +9,10 @@ const ForecastedDaysContainer = () => {
   const forecast = useSelector(state => state.weatherReducer.forecast);
   const weekDay = new Date().getDay();
 
+  if (forecast.length === 0) {
+    return null;
+  }
+
   const forecastData = forecast.map((day, index) => {
     return (
       <ForecastedDay

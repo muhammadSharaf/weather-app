@@ -126,14 +126,14 @@ const WeatherSlice = createSlice({
 export const getCurrentWeather = () => {
   return async (dispatch, getState) => {
     const {unit} = getState().settingsReducer;
-    const {currentCity} = getState().citiesReducer;
+    const {currentLocation} = getState().locationsReducer;
 
     dispatch(WeatherActions.setWeatherLoading(true));
 
     try {
       const response = await getWeather(
-        currentCity.lat,
-        currentCity.long,
+        currentLocation.lat,
+        currentLocation.long,
         unit.type,
       );
 
@@ -151,14 +151,14 @@ export const getCurrentWeather = () => {
 export const getForecast = () => {
   return async (dispatch, getState) => {
     const {unit} = getState().settingsReducer;
-    const {currentCity} = getState().citiesReducer;
+    const {currentLocation} = getState().locationsReducer;
 
     dispatch(WeatherActions.setForecastLoading(true));
 
     try {
       const response = await getWeatherForecast(
-        currentCity.lat,
-        currentCity.long,
+        currentLocation.lat,
+        currentLocation.long,
         unit.type,
       );
 

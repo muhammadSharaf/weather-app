@@ -24,8 +24,8 @@ export default function MainStack() {
         component={ScreensContainer[SCREENS.MAIN.CITIES]}
       />
       <RootStack.Screen
-        name={SCREENS.MAIN.DRAWER}
-        component={ScreensContainer[SCREENS.MAIN.DRAWER]}
+        name={SCREENS.MODALS.LOCATION}
+        component={ScreensContainer[SCREENS.MODALS.LOCATION]}
         options={{
           presentation: 'transparentModal',
         }}

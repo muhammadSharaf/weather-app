@@ -47,7 +47,7 @@ const HomeScreen = ({navigation}) => {
           left={
             <IconButton
               icon={'menu'}
-              onPress={() => navigation.navigate(SCREENS.MAIN.DRAWER)}
+              onPress={() => navigation.navigate(SCREENS.MODALS.LOCATION)}
             />
           }
           right={

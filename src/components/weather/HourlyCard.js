@@ -21,12 +21,14 @@ const HourlyCard = ({time, temp, state, unit, color, isLoading, svg}) => {
         color={color.shade}
         opacity={0.1}
       />
-      <Text style={styles.time}>{time}</Text>
+      <Text style={styles.time}>{time || ''}</Text>
       <CustomIcon
         name={state}
         style={[styles.icon, isLoading && styles.transparent]}
       />
-      <Text style={[styles.tmp, isLoading && styles.transparent]}>{`${temp}${unit.tempSymbol}`}</Text>
+      <Text style={[styles.tmp, isLoading && styles.transparent]}>{`${
+        temp || ''
+      }${unit.tempSymbol}`}</Text>
 
       {isLoading && (
         <View style={styles.loader}>

@@ -12,7 +12,7 @@ const CurrentWeatherContainer = () => {
   const unit = useStore().getState().settingsReducer.unit;
   const isLoading = useSelector(state => state.weatherReducer.isLoadingWeather);
   const weather = useSelector(state => state.weatherReducer.weather);
-  const city = useSelector(state => state.citiesReducer.currentCity);
+  const city = useSelector(state => state.locationsReducer.currentLocation);
   const conditions = useSelector(state => state.weatherReducer.conditions);
 
   const today = new Date();
