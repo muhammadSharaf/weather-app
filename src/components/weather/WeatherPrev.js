@@ -11,7 +11,7 @@ const WeatherPrev = ({weather, city, isLoading}) => {
   const {main: condition} = weather.state || {};
   const {name, code} = city;
 
-  const unit = useStore().getState().weatherReducer.unit;
+  const unit = useStore().getState().settingsReducer.unit;
 
   return (
     <View style={styles.container}>
@@ -23,7 +23,7 @@ const WeatherPrev = ({weather, city, isLoading}) => {
         ) : (
           <>
             {temp}
-            <Text style={styles.unit}> {unit.temperature}</Text>
+            <Text style={styles.unit}>{unit.temperature}</Text>
           </>
         )}
       </Text>

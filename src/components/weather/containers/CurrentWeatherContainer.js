@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {Text, View} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector, useStore } from "react-redux";
 import WeatherPrev from '../WeatherPrev';
 import ConditionsContainer from './ConditionsContainer';
 import {getCurrentWeather} from '../../../store/slices/weatherSlice';
@@ -9,6 +9,7 @@ import {MONTHS} from '../../../constants/units';
 
 const CurrentWeatherContainer = () => {
   const dispatch = useDispatch();
+  const unit = useStore().getState().settingsReducer.unit;
   const isLoading = useSelector(state => state.weatherReducer.isLoadingWeather);
   const weather = useSelector(state => state.weatherReducer.weather);
   const city = useSelector(state => state.citiesReducer.currentCity);
@@ -20,8 +21,6 @@ const CurrentWeatherContainer = () => {
     dispatch(getCurrentWeather());
   }, [dispatch]);
 
-  console.log('weather', weather);
-
   return (
     <View style={styles.container}>
       <View style={styles.dayInfoContainer}>
@@ -30,7 +29,7 @@ const CurrentWeatherContainer = () => {
         }`}</Text>
         <Text style={styles.minMaxTmp}>
           {!isLoading
-            ? `${weather?.main?.max} / ${weather?.main?.min} Feels like ${weather?.main?.feels}`
+            ? `${weather?.main?.max}${unit.tempSymbol} / ${weather?.main?.min}${unit.tempSymbol} Feels like ${weather?.main?.feels}${unit.tempSymbol}`
             : '‎ '}
         </Text>
         <Text style={styles.minMaxTmp}>

@@ -1,8 +1,6 @@
-import {WEATHER_UNIT} from '../../constants/units';
 import {WEATHER_CONDITIONS} from '../../constants/weatherConstants';
 
 const weatherState = {
-  unit: WEATHER_UNIT.METRIC,
   isLoadingWeather: false,
   isLoadingForecast: false,
   weather: {},

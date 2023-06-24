@@ -7,7 +7,7 @@ import DIMENSIONS from '../../theme/dimensions';
 import Loader from '../elements/custom/Loader';
 import Theme from '../../theme/theme';
 
-const HourlyCard = ({time, temp, state, color, isLoading, svg}) => {
+const HourlyCard = ({time, temp, state, unit, color, isLoading, svg}) => {
   const {y0, y1, pivot} = svg;
 
   return (
@@ -26,7 +26,7 @@ const HourlyCard = ({time, temp, state, color, isLoading, svg}) => {
         name={state}
         style={[styles.icon, isLoading && styles.transparent]}
       />
-      <Text style={[styles.tmp, isLoading && styles.transparent]}>{temp}</Text>
+      <Text style={[styles.tmp, isLoading && styles.transparent]}>{`${temp}${unit.tempSymbol}`}</Text>
 
       {isLoading && (
         <View style={styles.loader}>

@@ -6,7 +6,7 @@ import {DAYS} from '../../constants/units';
 import globalStyle from '../../theme/global.style';
 import {getWeatherIcon} from '../../helpers/weatherHelper';
 
-const ForecastedDay = ({dayIdx, day}) => {
+const ForecastedDay = ({dayIdx, day, unit}) => {
   const {temp, state} = day;
 
   return (
@@ -20,7 +20,7 @@ const ForecastedDay = ({dayIdx, day}) => {
         />
         <Text style={styles.text}>{state}</Text>
       </View>
-      <Text style={[globalStyle.flex, styles.text]}>{temp}</Text>
+      <Text style={[globalStyle.flex, styles.text]}>{`${temp}${unit.tempSymbol}`}</Text>
     </View>
   );
 };

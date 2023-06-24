@@ -3,6 +3,8 @@ import weatherState from '../states/weatherState';
 
 import {getWeather, getWeatherForecast} from '../../api/webService';
 import {WEATHER_CONDITIONS} from '../../constants/weatherConstants';
+import {convertSpeed, convertTemperature} from '../../helpers/conversionHelper';
+import {MEASURE_UNIT} from '../../constants/units';
 
 const WeatherSlice = createSlice({
   name: 'weather',
@@ -14,23 +16,14 @@ const WeatherSlice = createSlice({
     setForecastLoading(state, action) {
       state.isLoadingForecast = action.payload;
     },
-    setUnit(state, action) {
-      state.unit = action.payload;
-    },
     updateCurrentWeather(state, action) {
       state.weather = {
         main: {
           ...action.payload.main,
           temp: Math.round(action.payload.main.temp),
-          feels: `${Math.round(action.payload.main.feels_like)}${
-            state.unit.tempSymbol
-          }`,
-          min: `${Math.round(action.payload.main.temp_min)}${
-            state.unit.tempSymbol
-          }`,
-          max: `${Math.round(action.payload.main.temp_max)}${
-            state.unit.tempSymbol
-          }`,
+          feels: Math.round(action.payload.main.feels_like),
+          min: Math.round(action.payload.main.temp_min),
+          max: Math.round(action.payload.main.temp_max),
         },
         sun: action.payload.sys,
         state: action.payload.weather[0],
@@ -45,7 +38,8 @@ const WeatherSlice = createSlice({
         },
         {
           type: WEATHER_CONDITIONS.WIND,
-          value: `${action.payload.wind.speed} ${state.unit.speed}`,
+          value: action.payload.wind.speed,
+          unit: action.payload.unit.speed,
         },
         {
           type: WEATHER_CONDITIONS.HUMIDITY,
@@ -53,23 +47,77 @@ const WeatherSlice = createSlice({
         },
         {
           type: WEATHER_CONDITIONS.FEEL_TEMP,
-          value: `${Math.round(action.payload.main.feels_like)}${
-            state.unit.tempSymbol
-          }`,
+          value: Math.round(action.payload.main.feels_like),
+          unit: action.payload.unit.tempSymbol,
         },
       ];
     },
     updateDayTime(state, action) {
       state.dayTime = action.payload.map(item => ({
         time: new Date(item.dt_txt).getHours(),
-        temp: `${Math.round(item.main.temp)}${state.unit.tempSymbol}`,
+        temp: Math.round(item.main.temp),
         state: item.weather[0].main,
       }));
     },
     updateForecast(state, action) {
       state.forecast = action.payload.map(item => ({
-        temp: `${Math.round(item.main.temp)}${state.unit.tempSymbol}`,
+        temp: Math.round(item.main.temp),
         state: item.weather[0].main,
+      }));
+    },
+    convertUnits(state, action) {
+      const unit = action.payload;
+      const metricToImperial = unit.type === MEASURE_UNIT.IMPERIAL.type;
+
+      state.weather = {
+        ...state.weather,
+        main: {
+          ...state.weather.main,
+          temp: Math.round(
+            convertTemperature(state.weather.main.temp, metricToImperial),
+          ),
+          feels: Math.round(
+            convertTemperature(state.weather.main.feels_like, metricToImperial),
+          ),
+          min: Math.round(
+            convertTemperature(state.weather.main.min, metricToImperial),
+          ),
+          max: Math.round(
+            convertTemperature(state.weather.main.max, metricToImperial),
+          ),
+        },
+        wind: {
+          ...state.weather.wind,
+          speed: convertSpeed(state.weather.wind.speed, metricToImperial),
+        },
+      };
+
+      state.conditions = state.conditions.map(condition => {
+        if (condition.type === WEATHER_CONDITIONS.WIND) {
+          return {
+            ...condition,
+            value: convertSpeed(condition.value, metricToImperial),
+            unit: unit.speed,
+          };
+        } else if (condition.type === WEATHER_CONDITIONS.FEEL_TEMP) {
+          return {
+            ...condition,
+            value: convertTemperature(condition.value, metricToImperial),
+            unit: unit.tempSymbol,
+          };
+        }
+
+        return condition;
+      });
+
+      state.dayTime = state.dayTime.map(item => ({
+        ...item,
+        temp: convertTemperature(item.temp, metricToImperial),
+      }));
+
+      state.forecast = state.forecast.map(item => ({
+        ...item,
+        temp: convertTemperature(item.temp, metricToImperial),
       }));
     },
   },
@@ -77,7 +125,7 @@ const WeatherSlice = createSlice({
 
 export const getCurrentWeather = () => {
   return async (dispatch, getState) => {
-    const {unit} = getState().weatherReducer;
+    const {unit} = getState().settingsReducer;
     const {currentCity} = getState().citiesReducer;
 
     dispatch(WeatherActions.setWeatherLoading(true));
@@ -88,6 +136,8 @@ export const getCurrentWeather = () => {
         currentCity.long,
         unit.type,
       );
+
+      response.unit = unit; // inject units
 
       dispatch(WeatherActions.updateCurrentWeather(response));
       dispatch(WeatherActions.updateCurrentWeatherConditions(response));
@@ -100,7 +150,7 @@ export const getCurrentWeather = () => {
 
 export const getForecast = () => {
   return async (dispatch, getState) => {
-    const {unit} = getState().weatherReducer;
+    const {unit} = getState().settingsReducer;
     const {currentCity} = getState().citiesReducer;
 
     dispatch(WeatherActions.setForecastLoading(true));
@@ -133,8 +183,6 @@ export const getForecast = () => {
         nextDaysData.push(response.list[i]);
         i += 7;
       }
-
-      console.log('nextDaysData', nextDaysData);
 
       dispatch(WeatherActions.updateDayTime(todayData));
       dispatch(WeatherActions.updateForecast(nextDaysData));

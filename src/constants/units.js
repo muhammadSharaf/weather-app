@@ -23,17 +23,17 @@ export const DAYS = [
   'Saturday',
 ];
 
-export const WEATHER_UNIT = {
+export const MEASURE_UNIT = {
   IMPERIAL: {
     type: 'imperial',
     temperature: 'F',
     tempSymbol: ' F',
-    speed: 'mph',
+    speed: ' mph',
   },
   METRIC: {
     type: 'metric',
     temperature: '°C',
     tempSymbol: '°',
-    speed: 'km/h',
+    speed: ' km/h',
   },
 };

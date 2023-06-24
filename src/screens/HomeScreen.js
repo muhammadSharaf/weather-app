@@ -12,6 +12,10 @@ import IconButton from '../components/elements/buttons/IconButton';
 import {SCREENS} from '../navigation/SCREENS';
 
 const HomeScreen = ({navigation}) => {
+
+  //TODO error handling
+  //TODO cities
+
   const dispatch = useDispatch();
   const [refreshing, setRefreshing] = useState(false);
 
@@ -37,13 +41,15 @@ const HomeScreen = ({navigation}) => {
             tintColor={Theme.colors.primary}
           />
         }>
-        <AppBar>
-          <IconButton icon={'menu'} />
-          <IconButton
-            icon={'settings'}
-            onPress={() => navigation.navigate(SCREENS.MAIN.SETTINGS)}
-          />
-        </AppBar>
+        <AppBar
+          left={<IconButton icon={'menu'} />}
+          right={
+            <IconButton
+              icon={'settings'}
+              onPress={() => navigation.navigate(SCREENS.MAIN.SETTINGS)}
+            />
+          }
+        />
 
         <CurrentWeatherContainer />
         <ForecastContainer />

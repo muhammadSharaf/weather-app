@@ -9,7 +9,7 @@ const ConditionsContainer = ({list, isLoading}) => {
       <ConditionCard
         key={index}
         title={condition.type}
-        value={condition.value}
+        value={`${condition.value}${condition.unit || ''}`}
         isLoading={isLoading}
       />
     );
