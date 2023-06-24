@@ -12,11 +12,7 @@ import IconButton from '../components/elements/buttons/IconButton';
 import {SCREENS} from '../navigation/SCREENS';
 
 const HomeScreen = ({navigation}) => {
-  //TODO error handling
-  //TODO cities
-
   const state = useStore().getState();
-  console.log(state);
 
   const dispatch = useDispatch();
   const [refreshing, setRefreshing] = useState(false);
