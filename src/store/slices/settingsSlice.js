@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import settingsState from '../states/settingsState';
 import {MEASURE_UNIT} from '../../constants/units';
 import {WeatherActions} from './weatherSlice';
-import { LocationsActions } from "./locationsSlice";
+import {LocationsActions} from './locationsSlice';
 
 const SettingsSlice = createSlice({
   name: 'settings',

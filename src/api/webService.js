@@ -37,14 +37,3 @@ export const getLocationByCordWS = async (lat, long) => {
 
   return response;
 };
-
-ax.interceptors.response.use(
-  response => {
-    // Any status code that lie within the range of 2xx cause this function to trigger
-    console.log('res', response);
-    return response.data;
-  },
-  err => {
-    console.log('err', err);
-  },
-);
