@@ -1,3 +1,7 @@
+const CONSTANTS = {
+  MAX_RECENT_COUNT: 5,
+};
+
 export const MSG_CONSTANTS = {
   TITLE: {
     NOTE: 'Note',
@@ -11,3 +15,5 @@ export const MSG_CONSTANTS = {
     NO: 'No',
   },
 };
+
+export default CONSTANTS;

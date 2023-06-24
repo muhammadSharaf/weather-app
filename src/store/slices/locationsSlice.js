@@ -1,8 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
 import locationsState from '../states/locationsState';
-import {getLocationWeatherWS} from '../../api/webService';
+import {
+  getLocationWeatherWS,
+  getWeatherForecastWS,
+  getWeatherWS,
+} from '../../api/webService';
 import {showMsg} from './runTimeSlice';
-import {MSG_CONSTANTS} from '../../constants/runTimeConstants';
+import CONSTANTS, {MSG_CONSTANTS} from '../../constants/runTimeConstants';
 import Theme from '../../theme/theme';
 
 const LocationsSlice = createSlice({
@@ -12,8 +16,13 @@ const LocationsSlice = createSlice({
     addLocation(state, action) {
       console.log('action', action.payload);
 
+      let locations = [{...state.currentLocation}, ...state.locations];
+
+      if (locations.length > CONSTANTS.MAX_RECENT_COUNT) {
+        locations = locations.splice(0, CONSTANTS.MAX_RECENT_COUNT);
+      }
+
       const {name, country, lat, lon: long} = action.payload;
-      state.locations = [state.currentLocation, ...state.locations];
       state.currentLocation = {
         name,
         country,
@@ -21,6 +30,7 @@ const LocationsSlice = createSlice({
         long,
         temp: 0,
       };
+      state.locations = locations;
     },
     removeLocation(state, action) {},
     changeCurrentLocation(state, action) {
@@ -34,6 +44,13 @@ const LocationsSlice = createSlice({
 
       state.locations = [tempLocation, ...otherLocations];
     },
+    updateCurrentLocationTemp(state, action) {
+      state.currentLocation.temp = Math.round(action.payload);
+    },
+    updateTemp(state, action) {
+      const {idx, temp} = action.payload;
+      state.locations[idx].temp = Math.round(temp);
+    },
   },
 });
 
@@ -46,6 +63,37 @@ export const changeLocation = (name, country) => {
     });
 
     dispatch(LocationsActions.changeCurrentLocation(idx));
+  };
+};
+
+export const updateLocationTemp = (temp, idx, isCurrentLocation = false) => {
+  return dispatch => {
+    if (isCurrentLocation) {
+      dispatch(LocationsActions.updateCurrentLocationTemp(temp));
+    } else {
+      dispatch(LocationsActions.updateTemp({temp, idx}));
+    }
+  };
+};
+
+export const updateRecentLocationsTemp = () => {
+  return async (dispatch, getState) => {
+    const {unit} = getState().settingsReducer;
+    const {locations} = getState().locationsReducer;
+
+    for (let i = 0; i < locations.length; i++) {
+      try {
+        const res = await getWeatherWS(
+          locations[i].lat,
+          locations[i].long,
+          unit.type,
+        );
+
+        dispatch(LocationsActions.updateTemp({temp: res.main.temp, idx: i}));
+      } catch (err) {
+        console.log('err', err);
+      }
+    }
   };
 };
 

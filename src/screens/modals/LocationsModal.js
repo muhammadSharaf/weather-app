@@ -46,7 +46,7 @@ const LocationsModal = ({navigation}) => {
             key={index}
             city={location.name}
             state={location.country}
-            temp={`${location.temp}${unit.tempSymbol}`}
+            temp={location.temp ? `${location.temp}${unit.tempSymbol}` : ''}
             containerStyle={styles.currentLocation}
             onPress={() => onChangeLocation(location.name, location.country)}
           />
@@ -57,7 +57,7 @@ const LocationsModal = ({navigation}) => {
 
   return (
     <Drawer isVisible={isVisible} onClose={() => closeModal()}>
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <Header title={'Locations'} />
         <View style={styles.section}>
           <Header title={'Current location'} subHeader={true} />

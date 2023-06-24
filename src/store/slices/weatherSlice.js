@@ -5,6 +5,7 @@ import {getWeatherWS, getWeatherForecastWS} from '../../api/webService';
 import {WEATHER_CONDITIONS} from '../../constants/weatherConstants';
 import {convertSpeed, convertTemperature} from '../../helpers/conversionHelper';
 import {MEASURE_UNIT} from '../../constants/units';
+import {updateLocationTemp, updateRecentLocationsTemp} from './locationsSlice';
 
 const WeatherSlice = createSlice({
   name: 'weather',
@@ -141,6 +142,7 @@ export const getCurrentWeather = () => {
 
       dispatch(WeatherActions.updateCurrentWeather(response));
       dispatch(WeatherActions.updateCurrentWeatherConditions(response));
+      dispatch(updateLocationTemp(response.main.temp, null, true));
       dispatch(WeatherActions.setWeatherLoading(false));
     } catch (error) {
       console.log(error);
@@ -187,6 +189,8 @@ export const getForecast = () => {
       dispatch(WeatherActions.updateDayTime(todayData));
       dispatch(WeatherActions.updateForecast(nextDaysData));
       dispatch(WeatherActions.setForecastLoading(false));
+
+      dispatch(updateRecentLocationsTemp());
     } catch (error) {
       console.log(error);
     }
