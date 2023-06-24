@@ -1,4 +1,4 @@
-import {AppRegistry} from 'react-native';
+import {AppRegistry, StatusBar} from 'react-native';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {persistStore} from 'redux-persist';
@@ -12,6 +12,7 @@ const persistor = persistStore(store);
 const RNRedux = () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
+      <StatusBar barStyle={'dark-content'} translucent backgroundColor="transparent" />
       <App />
     </PersistGate>
   </Provider>

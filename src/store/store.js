@@ -4,12 +4,12 @@ import {persistReducer} from 'redux-persist';
 import thunk from 'redux-thunk';
 
 import WeatherSlice from './slices/weatherSlice';
-import CitiesSlice from './slices/citiesSlice';
+import LocationsSlice from './slices/locationsSlice';
 import SettingsSlice from './slices/settingsSlice';
 
 const reducers = combineReducers({
   weatherReducer: WeatherSlice.reducer,
-  citiesReducer: CitiesSlice.reducer,
+  citiesReducer: LocationsSlice.reducer,
   settingsReducer: SettingsSlice.reducer,
 });
 

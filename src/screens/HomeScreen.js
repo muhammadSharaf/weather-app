@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {RefreshControl, ScrollView} from 'react-native';
-import { useDispatch, useStore } from "react-redux";
+import {useDispatch, useStore} from 'react-redux';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AppBar from '../components/utils/AppBar';
 import globalStyles from '../theme/global.style';
@@ -12,13 +12,11 @@ import IconButton from '../components/elements/buttons/IconButton';
 import {SCREENS} from '../navigation/SCREENS';
 
 const HomeScreen = ({navigation}) => {
-
   //TODO error handling
   //TODO cities
 
-
   const state = useStore().getState();
-  console.log(state)
+  console.log(state);
 
   const dispatch = useDispatch();
   const [refreshing, setRefreshing] = useState(false);
@@ -46,7 +44,12 @@ const HomeScreen = ({navigation}) => {
           />
         }>
         <AppBar
-          left={<IconButton icon={'menu'} />}
+          left={
+            <IconButton
+              icon={'menu'}
+              onPress={() => navigation.navigate(SCREENS.MAIN.DRAWER)}
+            />
+          }
           right={
             <IconButton
               icon={'settings'}

@@ -19,7 +19,7 @@ const HourlyConditionsContainer = ({isLoading}) => {
     if (isLoading) {
       const currentHour = new Date().getHours();
       const hoursAheadData = dayTimeData.filter(
-        time => time.time >= currentHour,
+        time => time.time >= currentHour - 3,
       );
       setDayTime(hoursAheadData);
     } else {

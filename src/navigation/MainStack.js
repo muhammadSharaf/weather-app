@@ -23,6 +23,13 @@ export default function MainStack() {
         name={SCREENS.MAIN.CITIES}
         component={ScreensContainer[SCREENS.MAIN.CITIES]}
       />
+      <RootStack.Screen
+        name={SCREENS.MAIN.DRAWER}
+        component={ScreensContainer[SCREENS.MAIN.DRAWER]}
+        options={{
+          presentation: 'transparentModal',
+        }}
+      />
     </RootStack.Navigator>
   );
 }

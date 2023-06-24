@@ -1,11 +1,11 @@
-const citiesState = {
-  currentCity: {
+const locationsState = {
+  currentLocation: {
     name: 'Zocca',
     code: 'IT',
     lat: 44.34,
     long: 10.99,
   },
-  cities: [
+  locations: [
     {
       name: 'Al ‘Atabah',
       code: 'EG',
@@ -21,4 +21,4 @@ const citiesState = {
   ],
 };
 
-export default citiesState;
+export default locationsState;
