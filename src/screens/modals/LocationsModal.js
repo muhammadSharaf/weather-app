@@ -30,7 +30,7 @@ const LocationsModal = ({navigation}) => {
   }, [isVisible]);
 
   const onAddLocation = location => {
-    dispatch(queryLocation(location));
+    dispatch(queryLocation(location, () => closeModal()));
   };
 
   const onChangeLocation = (name, country) => {

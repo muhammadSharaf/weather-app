@@ -6,14 +6,21 @@ import {persistStore} from 'redux-persist';
 import App from './App';
 import store from './src/store/store';
 import {name as appName} from './app.json';
+import MsgContainer from './src/components/elements/modals/MsgContainer';
 
 const persistor = persistStore(store);
 
 const RNRedux = () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <StatusBar barStyle={'dark-content'} translucent backgroundColor="transparent" />
+      <StatusBar
+        barStyle={'dark-content'}
+        translucent
+        backgroundColor="transparent"
+      />
+
       <App />
+      <MsgContainer />
     </PersistGate>
   </Provider>
 );

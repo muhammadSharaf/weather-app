@@ -41,7 +41,7 @@ const HourlyConditionsContainer = ({isLoading}) => {
             time={formatHh(item.time)}
             temp={item.temp}
             state={WEATHER_ICONS[item.state]}
-            color={Theme.dayTime[`TIME_${item.time}`]}
+            color={Theme.colors.dayTime[`TIME_${item.time}`]}
             isLoading={isLoading}
             svg={{
               y0: WAVE[index],

@@ -26,7 +26,7 @@ const AddLocationCard = ({onAddLocation = () => {}}) => {
         title={'Add'}
         style={styles.addBtn}
         narrow={true}
-        isActive={inputVal && inputVal.length > 0}
+        isActive={inputVal && inputVal.trim().length > 0}
         onPress={() => onAddLocation(inputVal)}
       />
     </View>

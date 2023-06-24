@@ -6,11 +6,13 @@ import thunk from 'redux-thunk';
 import WeatherSlice from './slices/weatherSlice';
 import LocationsSlice from './slices/locationsSlice';
 import SettingsSlice from './slices/settingsSlice';
+import RunTimeSlice from './slices/runTimeSlice';
 
 const reducers = combineReducers({
   weatherReducer: WeatherSlice.reducer,
   locationsReducer: LocationsSlice.reducer,
   settingsReducer: SettingsSlice.reducer,
+  runTimeReducer: RunTimeSlice.reducer,
 });
 
 const persistConfig = {
