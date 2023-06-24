@@ -2,6 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import settingsState from '../states/settingsState';
 import {MEASURE_UNIT} from '../../constants/units';
 import {WeatherActions} from './weatherSlice';
+import { LocationsActions } from "./locationsSlice";
 
 const SettingsSlice = createSlice({
   name: 'settings',
@@ -21,6 +22,13 @@ export const changeUnit = unit => {
     dispatch(SettingsActions.setUnit(unit));
     dispatch(
       WeatherActions.convertUnits(
+        unit === MEASURE_UNIT.METRIC.type
+          ? MEASURE_UNIT.METRIC
+          : MEASURE_UNIT.IMPERIAL,
+      ),
+    );
+    dispatch(
+      LocationsActions.convertUnits(
         unit === MEASURE_UNIT.METRIC.type
           ? MEASURE_UNIT.METRIC
           : MEASURE_UNIT.IMPERIAL,

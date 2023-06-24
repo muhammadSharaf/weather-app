@@ -1,13 +1,17 @@
 import {createSlice} from '@reduxjs/toolkit';
 import locationsState from '../states/locationsState';
 import {
-  getLocationWeatherWS,
+  getLocationByCordWS,
+  getLocationWS,
   getWeatherForecastWS,
   getWeatherWS,
 } from '../../api/webService';
 import {showMsg} from './runTimeSlice';
 import CONSTANTS, {MSG_CONSTANTS} from '../../constants/runTimeConstants';
 import Theme from '../../theme/theme';
+import { MEASURE_UNIT } from "../../constants/units";
+import { convertSpeed, convertTemperature } from "../../helpers/conversionHelper";
+import { WEATHER_CONDITIONS } from "../../constants/weatherConstants";
 
 const LocationsSlice = createSlice({
   name: 'locations',
@@ -50,6 +54,20 @@ const LocationsSlice = createSlice({
     updateTemp(state, action) {
       const {idx, temp} = action.payload;
       state.locations[idx].temp = Math.round(temp);
+    },
+    convertUnits(state, action) {
+      const unit = action.payload;
+      const metricToImperial = unit.type === MEASURE_UNIT.IMPERIAL.type;
+
+      state.currentLocation = {
+        ...state.currentLocation,
+        temp: convertTemperature(state.currentLocation.temp, metricToImperial)
+      };
+
+      state.locations = state.locations.map(item => ({
+        ...item,
+        temp: convertTemperature(item.temp, metricToImperial),
+      }));
     },
   },
 });
@@ -103,60 +121,51 @@ export const addLocation = location => {
   };
 };
 
+export const queryLocationByCord = (lat, long, cb) => {
+  return async (dispatch, getState) => {
+    const {locations, currentLocation} = getState().locationsReducer;
+
+    try {
+      const response = await getLocationByCordWS(lat, long);
+
+      // Error handling
+      const valid = validateLocationAndDispatch(
+        dispatch,
+        response,
+        currentLocation,
+        locations,
+        cb,
+      );
+
+      if (!valid) {
+        return;
+      }
+
+      dispatch(addLocation(response[0]));
+      return cb();
+    } catch (err) {
+      console.log('err', err);
+    }
+  };
+};
+
 export const queryLocation = (location, cb) => {
   return async (dispatch, getState) => {
     const {locations, currentLocation} = getState().locationsReducer;
 
     try {
-      const response = await getLocationWeatherWS(location);
+      const response = await getLocationWS(location);
 
       // Error handling
-      if (response?.length > 0) {
-        if (
-          currentLocation.name === response[0].name &&
-          currentLocation.country === response[0].country
-        ) {
-          return dispatch(
-            showMsg({
-              title: MSG_CONSTANTS.TITLE.ERROR,
-              color: Theme.colors.msg.error,
-              msg: 'This is already your current selected location.',
-              activeBtnTitle: MSG_CONSTANTS.CONTROLS.OK,
-            }),
-          );
-        }
-
-        const idx = locations.findIndex(item => {
-          return (
-            item.name === response[0].name &&
-            item.country === response[0].country
-          );
-        });
-
-        if (idx >= 0) {
-          return dispatch(
-            showMsg({
-              title: MSG_CONSTANTS.TITLE.NOTE,
-              color: Theme.colors.msg.info,
-              msg: 'This location already exist on your recent locations, do you want to use it?',
-              activeBtnTitle: MSG_CONSTANTS.CONTROLS.YES,
-              passiveBtnTitle: MSG_CONSTANTS.CONTROLS.NO,
-              activeCallBack: () => {
-                dispatch(LocationsActions.changeCurrentLocation(idx));
-                return cb();
-              },
-            }),
-          );
-        }
-      } else {
-        return dispatch(
-          showMsg({
-            title: MSG_CONSTANTS.TITLE.ERROR,
-            color: Theme.colors.msg.error,
-            msg: "We couldn't find the location you looking for, please ensure you enter it correctly.",
-            activeBtnTitle: MSG_CONSTANTS.CONTROLS.OK,
-          }),
-        );
+      const valid = validateLocationAndDispatch(
+        dispatch,
+        response,
+        currentLocation,
+        locations,
+        cb,
+      );
+      if (!valid) {
+        return;
       }
 
       // Success handling
@@ -189,6 +198,68 @@ export const queryLocation = (location, cb) => {
       console.log('err', err);
     }
   };
+};
+
+
+
+const validateLocationAndDispatch = (
+  dispatch,
+  response,
+  currentLocation,
+  locations,
+  cb,
+) => {
+  if (response?.length > 0) {
+    if (
+      currentLocation.name === response[0].name &&
+      currentLocation.country === response[0].country
+    ) {
+      dispatch(
+        showMsg({
+          title: MSG_CONSTANTS.TITLE.ERROR,
+          color: Theme.colors.msg.error,
+          msg: 'This is already your current selected location.',
+          activeBtnTitle: MSG_CONSTANTS.CONTROLS.OK,
+        }),
+      );
+      return false;
+    }
+
+    const idx = locations.findIndex(item => {
+      return (
+        item.name === response[0].name && item.country === response[0].country
+      );
+    });
+
+    if (idx >= 0) {
+      dispatch(
+        showMsg({
+          title: MSG_CONSTANTS.TITLE.NOTE,
+          color: Theme.colors.msg.info,
+          msg: 'This location already exist on your recent locations, do you want to use it?',
+          activeBtnTitle: MSG_CONSTANTS.CONTROLS.YES,
+          passiveBtnTitle: MSG_CONSTANTS.CONTROLS.NO,
+          activeCallBack: () => {
+            dispatch(LocationsActions.changeCurrentLocation(idx));
+            return cb();
+          },
+        }),
+      );
+      return false;
+    }
+
+    return true;
+  } else {
+    dispatch(
+      showMsg({
+        title: MSG_CONSTANTS.TITLE.ERROR,
+        color: Theme.colors.msg.error,
+        msg: "We couldn't find the location you looking for, please ensure you enter it correctly.",
+        activeBtnTitle: MSG_CONSTANTS.CONTROLS.OK,
+      }),
+    );
+    return false;
+  }
 };
 
 export const LocationsActions = LocationsSlice.actions;

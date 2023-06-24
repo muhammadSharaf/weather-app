@@ -9,7 +9,11 @@ import LocationCard from '../../components/locations/LocationCard';
 import Separator from '../../components/elements/custom/Separator';
 import Theme from '../../theme/theme';
 import AddLocationCard from '../../components/locations/AddLocationCard';
-import {changeLocation, queryLocation} from '../../store/slices/locationsSlice';
+import {
+  changeLocation,
+  queryLocation,
+  queryLocationByCord,
+} from '../../store/slices/locationsSlice';
 
 const LocationsModal = ({navigation}) => {
   const dispatch = useDispatch();
@@ -31,6 +35,10 @@ const LocationsModal = ({navigation}) => {
 
   const onAddLocation = location => {
     dispatch(queryLocation(location, () => closeModal()));
+  };
+
+  const onAddGeo = (lat, long) => {
+    dispatch(queryLocationByCord(lat, long, () => closeModal()));
   };
 
   const onChangeLocation = (name, country) => {
@@ -76,7 +84,10 @@ const LocationsModal = ({navigation}) => {
           color={Theme.colors.border}
         />
 
-        <AddLocationCard onAddLocation={loc => onAddLocation(loc)} />
+        <AddLocationCard
+          onAddLocation={loc => onAddLocation(loc)}
+          onAddGeo={(lat, long) => onAddGeo(lat, long)}
+        />
 
         <Separator
           horizontal={true}

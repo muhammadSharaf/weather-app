@@ -6,6 +6,9 @@ import {WEATHER_CONDITIONS} from '../../constants/weatherConstants';
 import {convertSpeed, convertTemperature} from '../../helpers/conversionHelper';
 import {MEASURE_UNIT} from '../../constants/units';
 import {updateLocationTemp, updateRecentLocationsTemp} from './locationsSlice';
+import {showMsg} from './runTimeSlice';
+import {MSG_CONSTANTS} from '../../constants/runTimeConstants';
+import Theme from '../../theme/theme';
 
 const WeatherSlice = createSlice({
   name: 'weather',
@@ -146,6 +149,14 @@ export const getCurrentWeather = () => {
       dispatch(WeatherActions.setWeatherLoading(false));
     } catch (error) {
       console.log(error);
+      dispatch(
+        showMsg({
+          title: MSG_CONSTANTS.TITLE.ERROR,
+          color: Theme.colors.msg.error,
+          msg: 'Network error, please check your connection and try again.',
+          activeBtnTitle: MSG_CONSTANTS.CONTROLS.OK,
+        }),
+      );
     }
   };
 };
@@ -193,6 +204,14 @@ export const getForecast = () => {
       dispatch(updateRecentLocationsTemp());
     } catch (error) {
       console.log(error);
+      dispatch(
+        showMsg({
+          title: MSG_CONSTANTS.TITLE.ERROR,
+          color: Theme.colors.msg.error,
+          msg: 'Network error, please check your connection and try again.',
+          activeBtnTitle: MSG_CONSTANTS.CONTROLS.OK,
+        }),
+      );
     }
   };
 };

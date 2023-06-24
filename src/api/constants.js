@@ -8,4 +8,5 @@ export const API = {
   WEATHER: '/weather',
   FORECAST: '/forecast',
   GEO: '/direct',
+  GEO_CORD: '/reverse',
 };

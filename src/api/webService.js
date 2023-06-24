@@ -22,9 +22,17 @@ export const getWeatherForecastWS = async (lat, long, unit) => {
   return response;
 };
 
-export const getLocationWeatherWS = async (location, unit) => {
+export const getLocationWS = async (location, unit) => {
   const response = await ax.get(
     `${API.GEO_API}${API.GEO}?q=${location}&units=${unit}`,
+  );
+
+  return response;
+};
+
+export const getLocationByCordWS = async (lat, long) => {
+  const response = await ax.get(
+    `${API.GEO_API}${API.GEO_CORD}?lat=${lat}&lon=${long}`,
   );
 
   return response;

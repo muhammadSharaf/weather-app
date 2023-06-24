@@ -20,9 +20,16 @@ const MsgContainer = () => {
     activeCallBack,
     passiveCallBack,
     onClose,
+    closable,
   } = msgContent;
 
+  console.log('closable', closable);
+
   const closeModal = () => {
+    if (!closable) {
+      return;
+    }
+
     onClose && onClose();
     dispatch(clearMsg());
   };

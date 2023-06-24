@@ -9,6 +9,7 @@ const runTimeState = {
     activeCallBack: () => {},
     passiveCallBack: () => {},
     onClose: () => {},
+    closable: true,
   },
 };
 

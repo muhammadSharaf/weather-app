@@ -18,8 +18,7 @@ const reducers = combineReducers({
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['settingsReducer'],
-  // whitelist: ['settingsReducer', 'locationsReducer'],
+  whitelist: ['settingsReducer', 'locationsReducer'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
