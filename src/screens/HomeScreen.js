@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {RefreshControl, ScrollView} from 'react-native';
-import {useDispatch} from 'react-redux';
+import { useDispatch, useStore } from "react-redux";
 import {SafeAreaView} from 'react-native-safe-area-context';
 import AppBar from '../components/utils/AppBar';
 import globalStyles from '../theme/global.style';
@@ -15,6 +15,10 @@ const HomeScreen = ({navigation}) => {
 
   //TODO error handling
   //TODO cities
+
+
+  const state = useStore().getState();
+  console.log(state)
 
   const dispatch = useDispatch();
   const [refreshing, setRefreshing] = useState(false);
