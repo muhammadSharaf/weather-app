@@ -97,6 +97,11 @@ WeatherApp (Root Dir)
   - Add new location using entered location name or device location. (recommends best match for inaccurate location names)
   - Recent locations which can be pressed to toggle with current selected location.
 
+  
+*[Watch demo for iOS](https://ibb.co/7yXCxX9)*
+
+*[Watch demo for Android](https://ibb.co/rthx9LV)*
+
 ## Dependencies
 1. Axios
 2. Redux / Redux Toolkit / Redux Persist
@@ -105,9 +110,6 @@ WeatherApp (Root Dir)
 5. Vector Icons (Icomoon)
 6. RN Permissions
 7. RN Geolocation Service
-
-[Watch demo for iOS](https://ibb.co/7yXCxX9)
-[Watch demo for Android](https://ibb.co/rthx9LV)
 
 ## References
 This Project Uses OpenWeather Free API: api.openweathermap.org
