@@ -11,7 +11,7 @@ export const getWeatherWS = async (lat, long, unit) => {
     `${API.WEATHER_API}${API.WEATHER}?lat=${lat}&lon=${long}&units=${unit}`,
   );
 
-  return response;
+  return response.data;
 };
 
 export const getWeatherForecastWS = async (lat, long, unit) => {
@@ -19,7 +19,7 @@ export const getWeatherForecastWS = async (lat, long, unit) => {
     `${API.WEATHER_API}${API.FORECAST}?lat=${lat}&lon=${long}&units=${unit}`,
   );
 
-  return response;
+  return response.data;
 };
 
 export const getLocationWS = async (location, unit) => {
@@ -27,7 +27,7 @@ export const getLocationWS = async (location, unit) => {
     `${API.GEO_API}${API.GEO}?q=${location}&units=${unit}`,
   );
 
-  return response;
+  return response.data;
 };
 
 export const getLocationByCordWS = async (lat, long) => {
@@ -35,5 +35,5 @@ export const getLocationByCordWS = async (lat, long) => {
     `${API.GEO_API}${API.GEO_CORD}?lat=${lat}&lon=${long}`,
   );
 
-  return response;
+  return response.data;
 };

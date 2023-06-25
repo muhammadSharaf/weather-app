@@ -10,6 +10,7 @@ import {clearMsg} from '../../../store/slices/runTimeSlice';
 const MsgContainer = () => {
   const dispatch = useDispatch();
   const msgContent = useSelector(state => state.runTimeReducer.msg);
+
   const {
     isVisible,
     title,
@@ -22,8 +23,6 @@ const MsgContainer = () => {
     onClose,
     closable,
   } = msgContent;
-
-  console.log('closable', closable);
 
   const closeModal = () => {
     if (!closable) {

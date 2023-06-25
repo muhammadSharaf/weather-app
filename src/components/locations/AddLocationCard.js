@@ -35,7 +35,7 @@ const AddLocationCard = ({onAddLocation = () => {}, onAddGeo = () => {}}) => {
       dispatch(
         showMsg({
           title: MSG_CONSTANTS.TITLE.ERROR,
-          color: Theme.colors.msg.error,
+          titleColor: Theme.colors.msg.error,
           msg: 'Location permission is not granted.',
           activeBtnTitle: MSG_CONSTANTS.CONTROLS.OK,
           closable: true,
@@ -47,7 +47,7 @@ const AddLocationCard = ({onAddLocation = () => {}, onAddGeo = () => {}}) => {
     dispatch(
       showMsg({
         title: MSG_CONSTANTS.TITLE.NOTE,
-        color: Theme.colors.msg.info,
+        titleColor: Theme.colors.msg.info,
         msg: 'Please wait...',
         closable: false,
       }),
@@ -65,7 +65,7 @@ const AddLocationCard = ({onAddLocation = () => {}, onAddGeo = () => {}}) => {
         dispatch(
           showMsg({
             title: MSG_CONSTANTS.TITLE.ERROR,
-            color: Theme.colors.msg.error,
+            titleColor: Theme.colors.msg.error,
             msg: error.message,
             activeBtnTitle: MSG_CONSTANTS.CONTROLS.OK,
             closable: true,

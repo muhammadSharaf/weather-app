@@ -14,6 +14,7 @@ import {
   queryLocation,
   queryLocationByCord,
 } from '../../store/slices/locationsSlice';
+import MsgContainer from '../../components/elements/modals/MsgContainer';
 
 const LocationsModal = ({navigation}) => {
   const dispatch = useDispatch();
@@ -107,6 +108,7 @@ const LocationsModal = ({navigation}) => {
           )}
         </View>
       </ScrollView>
+      <MsgContainer />
     </Drawer>
   );
 };

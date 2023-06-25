@@ -10,6 +10,7 @@ import {getCurrentWeather, getForecast} from '../store/slices/weatherSlice';
 import Theme from '../theme/theme';
 import IconButton from '../components/elements/buttons/IconButton';
 import {SCREENS} from '../navigation/SCREENS';
+import MsgContainer from "../components/elements/modals/MsgContainer";
 
 const HomeScreen = ({navigation}) => {
   const state = useStore().getState();
@@ -57,6 +58,7 @@ const HomeScreen = ({navigation}) => {
         <CurrentWeatherContainer />
         <ForecastContainer />
       </ScrollView>
+      <MsgContainer />
     </SafeAreaView>
   );
 };

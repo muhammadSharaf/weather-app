@@ -18,8 +18,6 @@ const LocationsSlice = createSlice({
   initialState: locationsState,
   reducers: {
     addLocation(state, action) {
-      console.log('action', action.payload);
-
       let locations = [{...state.currentLocation}, ...state.locations];
 
       if (locations.length > CONSTANTS.MAX_RECENT_COUNT) {
@@ -182,7 +180,7 @@ export const queryLocation = (location, cb) => {
           return dispatch(
             showMsg({
               title: MSG_CONSTANTS.TITLE.ERROR,
-              color: Theme.colors.msg.info,
+              titleColor: Theme.colors.msg.info,
               msg: `We couldn't find the location you looking for, do you mean ${response[0].name}, ${response[0].country}?`,
               activeBtnTitle: MSG_CONSTANTS.CONTROLS.YES,
               passiveBtnTitle: MSG_CONSTANTS.CONTROLS.NO,
@@ -216,8 +214,8 @@ const validateLocationAndDispatch = (
     ) {
       dispatch(
         showMsg({
-          title: MSG_CONSTANTS.TITLE.ERROR,
-          color: Theme.colors.msg.error,
+          title: MSG_CONSTANTS.TITLE.NOTE,
+          titleColor: Theme.colors.msg.info,
           msg: 'This is already your current selected location.',
           activeBtnTitle: MSG_CONSTANTS.CONTROLS.OK,
         }),
@@ -235,7 +233,7 @@ const validateLocationAndDispatch = (
       dispatch(
         showMsg({
           title: MSG_CONSTANTS.TITLE.NOTE,
-          color: Theme.colors.msg.info,
+          titleColor: Theme.colors.msg.info,
           msg: 'This location already exist on your recent locations, do you want to use it?',
           activeBtnTitle: MSG_CONSTANTS.CONTROLS.YES,
           passiveBtnTitle: MSG_CONSTANTS.CONTROLS.NO,
@@ -253,7 +251,7 @@ const validateLocationAndDispatch = (
     dispatch(
       showMsg({
         title: MSG_CONSTANTS.TITLE.ERROR,
-        color: Theme.colors.msg.error,
+        titleColor: Theme.colors.msg.error,
         msg: "We couldn't find the location you looking for, please ensure you enter it correctly.",
         activeBtnTitle: MSG_CONSTANTS.CONTROLS.OK,
       }),

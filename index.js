@@ -20,7 +20,6 @@ const RNRedux = () => (
       />
 
       <App />
-      <MsgContainer />
     </PersistGate>
   </Provider>
 );
